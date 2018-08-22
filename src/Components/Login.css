@@ -1,0 +1,42 @@
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+.buttonLogin {
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+}
+
+/* Add a hover effect for buttons */
+.buttonLogin:hover {
+    opacity: 0.8;
+}
+
+.teksti {
+    width: 30%;
+}
+
+/* Change styles for smaller screens */
+
+@media screen and (max-width: 1000px) {
+    .teksti {
+        display: block;
+        float: none;
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .teksti {
+        display: block;
+        float: none;
+        width: 80%;
+    }
+}
