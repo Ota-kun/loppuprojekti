@@ -17,7 +17,7 @@ class Map extends Component {
   }
   
   componentDidMount() {
-   
+  
     var allToilets = []
     getAllToilets((data) => {
       data.map(res => {
@@ -45,7 +45,7 @@ class Map extends Component {
   render() {
     var googleMarkers =this.state.markers.map((marker)=> {
       return (
-           <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id} > </InfoWindowMap>
+          <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id} > </InfoWindowMap>
         )  });  
     const Map = withGoogleMap(props => (
       <GoogleMap
