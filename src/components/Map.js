@@ -11,8 +11,8 @@ class Map extends Component {
       lng: 24.94145,
       zoom: 17,
       markers: [],
-      setlatlng: [],
-      info: false
+      admarker:false
+
     }
   }
   
@@ -28,47 +28,25 @@ class Map extends Component {
     });
   }
   getLocation = (event) => {
+    if(this.state.admarker==true){
+    var allmarkers=this.state.markers;
     this.state.setlatlng = [event.latLng.lat(), event.latLng.lng()]
-    console.log(this.state.setlatlng)
+    allmarkers.push({latitude:event.latLng.lat(), longitude:event.latLng.lng(), name:"kukkuu", toilet_id:"10000"})
+    this.setState({markers:allmarkers})
+    console.log(allmarkers)
+    }
   }
 
   addToilet = () => {
-    document.getElementById("map").style.cursor = "help";
+    this.setState({admarker:true})
 
-  }
-  popUp=()=>{
-    if(this.state.info==false){
-      this.setState({info:true})
-      console.log(this.state.info)
-    }else{
-      this.setState({info:false})
-      console.log(this.state.info)
-    }
   }
 
   render() {
     var googleMarkers =this.state.markers.map((marker)=> {
       return (
            <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id} > </InfoWindowMap>
-        )  });
-      // const googleMarkers = this.state.markers.map(marker => (
-      //   <Marker
-      //   position={{ lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude) }}
-      //   key={marker.toilet_id}
-      //   onClick={this.popUp}
-      // >{this.state.info &&
-			// 	<InfoWindow
-			// 			onCloseClick={this.handleToggle}
-			// 			>
-			// 		<span>Something</span>
-			// 	</InfoWindow>
-			//  }
-      // </Marker>
-      // )); 
-    
-    
-     
-
+        )  });  
     const Map = withGoogleMap(props => (
       <GoogleMap
         defaultCenter={{ lat: 60.171944, lng: 24.941389 }}
