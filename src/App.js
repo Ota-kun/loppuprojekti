@@ -11,6 +11,7 @@ import Signup from './Components/Signup';
 
 import Map from './Components/Map';
 import CustomNavbar from './Components/Navbar';
+import Etsi from './Components/GoogleMap';
 
 class App extends Component {
   render() {
@@ -24,6 +25,8 @@ class App extends Component {
 
         {/*Navbar */}
         <CustomNavbar />
+
+        <Etsi />
 
         {/*Vaihtuva kontentti*/}
         <center>
@@ -51,7 +54,6 @@ class App extends Component {
           Copyright &copy; 2018 Toilet APP
         </footer>
         <br />
-
       </div>
     );
   }
