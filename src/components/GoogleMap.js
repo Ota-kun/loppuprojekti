@@ -115,13 +115,13 @@ const MapWithASearchBox = compose(
 class Etsi extends Component {
     
     render() {
-       return(
+      return(
           <div>
               <MapWithASearchBox/>
               
                   
           </div>
-       );
-       }
+      );
+      }
     };
     export default Etsi;
