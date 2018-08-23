@@ -1,84 +1,143 @@
 import React, { Component } from 'react';
-import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import { getAllToilets } from '../utilities/Service'
-import "../Map.css"
-import InfoWindowMap from './InfoWindowMap.js'
-class Map extends Component {
-  constructor() {
-    super()
-    this.state = {
-      lat: 60.17131,
-      lng: 24.94145,
-      zoom: 17,
-      markers: [],
-      admarker:false
+import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox';
+import { getAllToilets } from '../utilities/Service';
+import InfoWindowMap from './InfoWindowMap'
+const google = window.google;
+const _ = require("lodash");
+const { compose, withProps, lifecycle } = require("recompose");
+const {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} = require("react-google-maps");
+// const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
-    }
-  }
-  
-  componentDidMount() {
-  
-    var allToilets = []
+const MapWithASearchBox = compose(
+  withProps({
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA724IPb4Emgc7Xdfc6WI4XdhML1eQPI6k&v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `100vh`, width: '100Wh' }} />,
+    mapElement: <div style={{ height: `100%` }} />,    
+  }),
+  lifecycle({
+      
+    componentDidMount() {
+        
+      var allToilets = []
     getAllToilets((data) => {
       data.map(res => {
         allToilets.push(res)
       })
 
-      this.setState({ markers: allToilets })
+      this.setState({ toiletmarkers: allToilets })
     });
-  }
-  getLocation = (event) => {
-    if(this.state.admarker==true){
-    var allmarkers=this.state.markers;
-    this.state.setlatlng = [event.latLng.lat(), event.latLng.lng()]
-    allmarkers.push({latitude:event.latLng.lat(), longitude:event.latLng.lng(), name:"kukkuu", toilet_id:"10000"})
-    this.setState({markers:allmarkers})
-    console.log(allmarkers)
-    }
-  }
+      
+      const refs = {}
 
-  addToilet = () => {
-    this.setState({admarker:true})
+      this.setState({
+        bounds: null,
+        center: {
+          lat: 60.17131, lng: 24.94145
+        },
+        markers: [],
+        toiletmarkers:[],
+        onMapMounted: ref => {
+          refs.map = ref;
+        },
+        onBoundsChanged: () => {
+          this.setState({
+            bounds: refs.map.getBounds(),
+            center: refs.map.getCenter(),
+          })
+        },
+        onSearchBoxMounted: ref => {
+          refs.searchBox = ref;
+        },
+        onPlacesChanged: () => {
+          const places = refs.searchBox.getPlaces();
+          const bounds = new google.maps.LatLngBounds();
 
-  }
+          places.forEach(place => {
+            if (place.geometry.viewport) {
+              bounds.union(place.geometry.viewport)
+            } else {
+              bounds.extend(place.geometry.location)
+            }
+          });
+          const nextMarkers = places.map(place => ({
+            position: place.geometry.location,
+          }));
+          const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
+          
+          this.setState({
+            center: nextCenter,
+            markers: nextMarkers,
+          });
+          
+          // refs.map.fitBounds(bounds);
+        },
 
-  render() {
-    var googleMarkers =this.state.markers.map((marker)=> {
-      return (
-          <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id} > </InfoWindowMap>
-        )  });  
-    const Map = withGoogleMap(props => (
-      <GoogleMap
-        defaultCenter={{ lat: 60.171944, lng: 24.941389 }}
-        defaultZoom={16}
-        defaultOptions={{
-          streetViewControl: true,
-          scaleControl: true,
-          mapTypeControl: false,
-            panControl: true,
-            zoomControl: true,
-            rotateControl: true,
-            fullscreenControl: true,
+      })
+      
+    },
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props =>
+  
+  <GoogleMap
+    ref={props.onMapMounted}
+    defaultZoom={15}
+    center={props.center}    
+    onIdle={props.onMapIdle}
+    onBoundsChanged={props.onBoundsChanged}
+    onClick={props.onMapClick}
+  >
+    
+    <SearchBox
+      ref={props.onSearchBoxMounted}
+      bounds={props.bounds}
+      controlPosition={google.maps.ControlPosition.TOP_LEFT}
+      onPlacesChanged={props.onPlacesChanged}
+    >
+      <input
+        type="text"
+        placeholder="Customized your placeholder"
+        style={{
+          boxSizing: `border-box`,
+          border: `1px solid transparent`,
+          width: `240px`,
+          height: `32px`,
+          marginTop: `27px`,
+          padding: `0 12px`,
+          borderRadius: `3px`,
+          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+          fontSize: `14px`,
+          outline: `none`,
+          textOverflow: `ellipses`,
+        }}
+      />
+    </SearchBox>
+    {props.markers.map((marker, index) =>
+      <Marker key={index} position={marker.position} />
+    )}
+    
+    {props.toiletmarkers.map((marker)=>
+    <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id}> </InfoWindowMap> )};
+  </GoogleMap>
+);
 
-          }
-        }
-        
-        
-        onClick={this.getLocation} >
-        {googleMarkers}
-      </GoogleMap>
-    ));
-    return (
-      <div id="map"   >
-        <Map id="map" 
-          containerElement={<div style={{ height: `78vh`, width: '90wv' }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          controls={null}
-        >
-        </Map>
-        <button id="nappi" onClick={this.addToilet}>Lisää WC</button>
-      </div>
-    );
-  }
-};
-export default Map;
+class Map2 extends Component {
+    
+    render() {
+       return(
+          <div>
+              <MapWithASearchBox/>
+              
+                  
+          </div>
+       );
+       }
+    };
+    export default Map2;

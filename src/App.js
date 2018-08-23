@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './Components/Home';
@@ -13,10 +14,14 @@ import Map from './Components/Map';
 import CustomNavbar from './Components/Navbar';
 import Etsi from './Components/GoogleMap';
 import { GoogleMap } from 'react-google-maps';
+=======
+import Map from './components/Map';
+>>>>>>> f23070e8c72f1469aab92309d3b1ff6bef3524e6
 
 class App extends Component {
   render() {
     return (
+<<<<<<< HEAD
       <div className="App">
 
         {/*Header -- POIS KÄYTÖSTÄ
@@ -55,6 +60,10 @@ class App extends Component {
           Copyright &copy; 2018 Toilet APP
         </footer>
         <br />
+=======
+      <div className="App">   
+       <Map/>
+>>>>>>> f23070e8c72f1469aab92309d3b1ff6bef3524e6
       </div>
     );
   }
