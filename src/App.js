@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Map from './components/Map.js'
-import Etsi from './components/GoogleMap';
+import GoogleMap2 from './components/GoogleMap2';
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App">
       {/* <Map/>   */}
        
-       <Etsi/>
+       <GoogleMap2/>
       </div>
     );
   }

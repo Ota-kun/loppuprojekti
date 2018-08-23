@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {SearchBox} from 'react-google-maps/lib/components/places/SearchBox';
-
-import {getAllToilets} from '../utilities/Service'
+import { getAllToilets } from '../utilities/Service';
+import InfoWindowMap from './InfoWindowMap.js'
 const google = window.google;
 const _ = require("lodash");
 const { compose, withProps, lifecycle } = require("recompose");
@@ -18,13 +18,20 @@ const MapWithASearchBox = compose(
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA724IPb4Emgc7Xdfc6WI4XdhML1eQPI6k&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `100vh`, width: '100Wh' }} />,
-    mapElement: <div style={{ height: `100%` }} />,
+    mapElement: <div style={{ height: `100%` }} />,    
   }),
   lifecycle({
       
     componentDidMount() {
         
-      
+      var allToilets = []
+    getAllToilets((data) => {
+      data.map(res => {
+        allToilets.push(res)
+      })
+
+      this.setState({ toiletmarkers: allToilets })
+    });
       
       const refs = {}
 
@@ -34,6 +41,7 @@ const MapWithASearchBox = compose(
           lat: 60.17131, lng: 24.94145
         },
         markers: [],
+        toiletmarkers:[],
         onMapMounted: ref => {
           refs.map = ref;
         },
@@ -66,7 +74,7 @@ const MapWithASearchBox = compose(
             center: nextCenter,
             markers: nextMarkers,
           });
-
+          
           // refs.map.fitBounds(bounds);
         },
 
@@ -77,12 +85,16 @@ const MapWithASearchBox = compose(
   withScriptjs,
   withGoogleMap
 )(props =>
+  
   <GoogleMap
     ref={props.onMapMounted}
     defaultZoom={15}
-    center={props.center}
+    center={props.center}    
+    onIdle={props.onMapIdle}
     onBoundsChanged={props.onBoundsChanged}
+    onClick={props.onMapClick}
   >
+    
     <SearchBox
       ref={props.onSearchBoxMounted}
       bounds={props.bounds}
@@ -110,9 +122,13 @@ const MapWithASearchBox = compose(
     {props.markers.map((marker, index) =>
       <Marker key={index} position={marker.position} />
     )}
+    
+    {props.toiletmarkers.map((marker)=>
+    <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id}> </InfoWindowMap> )};
   </GoogleMap>
 );
-class Etsi extends Component {
+
+class GoogleMap2 extends Component {
     
     render() {
        return(
@@ -124,4 +140,4 @@ class Etsi extends Component {
        );
        }
     };
-    export default Etsi;
+    export default GoogleMap2;
