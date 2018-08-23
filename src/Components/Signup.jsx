@@ -25,7 +25,7 @@ class Signup extends Component {
                             <Label for="examplePassword">Salasana</Label>
                             <Input type="password" name="password" required="true" id="password" placeholder="Syötä salasana" />
                         </FormGroup>
-                        <Button onClick="">Rekisteröidy</Button>
+                        <Button className="buttonSignup" onClick="">Rekisteröidy</Button>
                     </Form>
                     <br />
                     Oletko jo käyttäjä? <Link to="/Login">Kirjaudu tästä!</Link>

@@ -70,13 +70,13 @@ class Map extends Component {
     ));
     return (
       <div id="map"   >
-        <button id="nappi" onClick={this.addToilet}>jeesus</button>
         <Map id="map" 
-          containerElement={<div style={{ height: `100vh`, width: '100Wh' }} />}
+          containerElement={<div style={{ height: `78vh`, width: '100vw' }} />}
           mapElement={<div style={{ height: `100%` }} />}
           controls={null}
         >
         </Map>
+        <button id="nappi" onClick={this.addToilet}>Lisää WC</button>
       </div>
     );
   }

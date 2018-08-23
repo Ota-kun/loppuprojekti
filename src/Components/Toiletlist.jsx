@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Toiletlist.scss';
+import './Toiletlist.css';
 import { GetAllToilets } from '../utils/WebapiService';
 import geolib from 'geolib';
 
@@ -44,16 +44,25 @@ class Toiletlist extends Component {
 
         var t = this.state.markers.map(marker => (
 
-            <li style={{ margin: '1% 12%', padding: '3%', border: 'solid', borderRadius: '10px', backgroundColor: '#e2edff' }}>
+            <center>
+                <li style={{ 
+                    width: '70%',
+                    margin: '1% 0',
+                    padding: '3%',
+                    border: 'solid',
+                    borderRadius: '10px',
+                    backgroundColor: '#e2edff' 
+                }} >
 
-                {marker.name}, {marker.address}, {marker.zip}, {marker.city},
-                {marker.rating} , {marker.inva} , {marker.pricing} , {geolib.getDistance(
-                    {latitude: sessionStorage.getItem("latitude"), longitude: sessionStorage.getItem("longitude")},
-                    {latitude: marker.latitude, longitude: marker.longitude}
-                )/1000 } km
-
-            </li>
-
+                    {marker.name}, {marker.address}, {marker.zip}, {marker.city},
+                    {marker.rating} , {marker.inva} , {marker.pricing} , 
+            
+                    {/* {geolib.getDistance(
+                        {latitude: sessionStorage.getItem("latitude"), longitude: sessionStorage.getItem("longitude")},
+                        {latitude: marker.latitude, longitude: marker.longitude}
+                    )/1000 } km */}
+                </li>
+            </center>
         ));
 
         return (
@@ -62,7 +71,7 @@ class Toiletlist extends Component {
                 <h2>TOILET LIST</h2>
                 <br />
                 
-                <table style={{ marginLeft: 0, marginRight: 0, display: 'block', listStyleType: 'none' }}>
+                <table className="wc" style={{ marginLeft: 0, marginRight: 0, display: 'block', width: '100%', listStyleType: 'none' }}>
                     {t}
                 </table>
             </div>
