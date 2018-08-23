@@ -3,6 +3,7 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import {getAllToilets} from '../utilities/Service'
 
 
+
 class Map extends Component {
   constructor() {
     super()
@@ -36,17 +37,23 @@ class Map extends Component {
       <GoogleMap
         defaultCenter = { { lat: 60.171944, lng: 24.941389 } }
         defaultZoom = { 16 }
+        
       >
+      
       {googleMarkers}
     
       </GoogleMap>
+      
+
    ));
    return(
       <div>
         <Map
           containerElement={ <div style={{ height: `100vh`, width: '100Wh' }} /> }
           mapElement={ <div style={{ height: `100%` }} /> }
-        />
+        >
+        
+        </Map>
       </div>
    );
    }
