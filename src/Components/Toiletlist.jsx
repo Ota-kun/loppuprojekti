@@ -65,6 +65,14 @@ class Toiletlist extends Component {
             </center>
         ));
 
+        // t.sort(function (s1, s2) {
+        //     return geolib.getDistance(
+        //         {latitude: 60.17131, longitude: 24.94145},
+        //         {latitude: s2.latitude, longitude: s2.longitude}) - geolib.getDistance(
+        //             {latitude: 60.17131, longitude: 24.94145},
+        //             {latitude: s1.latitude, longitude: s1.longitude});
+        // });
+
         return (
             <div>
                 <br />

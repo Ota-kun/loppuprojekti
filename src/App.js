@@ -12,6 +12,7 @@ import Signup from './Components/Signup';
 import Map from './Components/Map';
 import CustomNavbar from './Components/Navbar';
 import Etsi from './Components/GoogleMap';
+import { GoogleMap } from 'react-google-maps';
 
 class App extends Component {
   render() {
@@ -27,7 +28,7 @@ class App extends Component {
         <CustomNavbar />
 
         <Etsi />
-
+        <br />
         {/*Vaihtuva kontentti*/}
         <center>
         <div>
