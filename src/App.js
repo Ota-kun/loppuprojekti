@@ -9,6 +9,8 @@ import Chat from './Components/Chat';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Logged from './Components/Profile';
+import Main from './Components/Main';
+import MapDrive from './Components/MapDrive';
 
 import Map from './Components/Map';
 import CustomNavbar from './Components/Navbar';
@@ -39,7 +41,7 @@ class App extends Component {
 
           <Router>
             <div>
-              <Route exact path="/" component={Map} />
+              <Route exact path="/" component={Main} />
               <Route path="/Home" component={Home} />
               <Route path="/About" component={About} />
               <Route path="/Wclist" component={Toiletlist} />
@@ -51,16 +53,17 @@ class App extends Component {
           </Router>
 
         </div>
-
+        {/*
         <div className="footerClass">
           <hr style={{ marginBottom: '0' }}></hr>
         
-          {/*Footer*/}
+          // Footer
           <footer>
             Copyright &copy; 2018 Toilet APP
           </footer>
           <br />
         </div>
+        */}
         </center>
       </div>
     );

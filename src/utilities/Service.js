@@ -1,9 +1,10 @@
 const toiletsUrl = "https://vessaapi.azurewebsites.net/api/toilets/"
 const usersUrl = "https://vessaapi.azurewebsites.net/api/users/"
 const reviewsUrl = "https://vessaapi.azurewebsites.net/api/reviews/"
+const reportsUrl = "https://vessaapi.azurewebsites.net/api/reports/"
 // Puuttuu vielä Viesti-functionit. Alhaalla esimerkki CALLBACKistä.
 
-export function AddNewToilet(toilet) {
+export function addNewToilet(toilet) {
     fetch(toiletsUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -105,7 +106,7 @@ export function UpdateUser(user) {
         .then(res => console.log(res))
 }
 
-export function AddNewReview(review) {
+export function addNewReview(review) {
     fetch(reviewsUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -149,6 +150,18 @@ export function UpdateReview(review) {
         body: JSON.stringify({
             'review_id': review.review_id, 'user_id': review.user_id, 'toilet_id': review.toilet_id, 
             'rating': review.rating, 'review_text': review.review_text
+        })
+    })
+        .then(res => console.log(res))
+}
+
+export function addNewReport(report) {
+    fetch(reportsUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            'toilet_id': report.toilet_id, 'user_id': report.user_id, 'name': report.name,
+            'text': report.text
         })
     })
         .then(res => console.log(res))
