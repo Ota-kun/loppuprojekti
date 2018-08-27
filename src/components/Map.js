@@ -16,8 +16,8 @@ const {
 const MapWithASearchBox = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA724IPb4Emgc7Xdfc6WI4XdhML1eQPI6k&v=3.exp&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `100vh`, width: '100Wh' }} />,
+    loadingElement: <div style={{ height: `85vh` }} />,
+    containerElement: <div style={{ height: `85vh`, width: '100wv' }} />,
     mapElement: <div style={{ height: `100%` }} />,    
   }),
   lifecycle({
@@ -124,20 +124,19 @@ const MapWithASearchBox = compose(
     )}
     
     {props.toiletmarkers.map((marker)=>
-    <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id}> </InfoWindowMap> )};
+    <InfoWindowMap lat={marker.latitude} lng={marker.longitude} key={marker.toilet_id}> </InfoWindowMap> )}
   </GoogleMap>
 );
 
 class Map2 extends Component {
     
     render() {
-       return(
+      return(
           <div>
               <MapWithASearchBox/>
-              
-                  
           </div>
-       );
-       }
-    };
-    export default Map2;
+      );
+    }
+};
+
+export default Map2;

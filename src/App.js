@@ -8,11 +8,13 @@ import Toiletlist from './Components/Toiletlist';
 import Chat from './Components/Chat';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import Logged from './Components/Profile';
 
 import Map from './Components/Map';
 import CustomNavbar from './Components/Navbar';
-import Etsi from './Components/GoogleMap';
-import { GoogleMap } from 'react-google-maps';
+
+// import Etsi from './Components/GoogleMap';
+// import { GoogleMap } from 'react-google-maps';
 
 class App extends Component {
   render() {
@@ -27,10 +29,9 @@ class App extends Component {
         {/*Navbar */}
         <CustomNavbar />
 
-        <Etsi />
-        <br />
-        <Map/>
-        <br />
+        {/* <Etsi /> */}
+
+        {/* <Map/> */}
 
         {/*Vaihtuva kontentti*/}
         <center>
@@ -44,20 +45,23 @@ class App extends Component {
               <Route path="/Wclist" component={Toiletlist} />
               <Route path="/Chat" component={Chat} />
               <Route path="/Login" component={Login} />
+              <Route path="/Profile" component={Logged} />
               <Route path="/Signup" component={Signup} />
             </div>
           </Router>
 
         </div>
-        </center>
 
-        <hr />
+        <div className="footerClass">
+          <hr style={{ marginBottom: '0' }}></hr>
         
-        {/*Footer*/}
-        <footer>
-          Copyright &copy; 2018 Toilet APP
-        </footer>
-        <br />
+          {/*Footer*/}
+          <footer>
+            Copyright &copy; 2018 Toilet APP
+          </footer>
+          <br />
+        </div>
+        </center>
       </div>
     );
   }

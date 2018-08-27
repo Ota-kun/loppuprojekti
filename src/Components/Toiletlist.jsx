@@ -55,7 +55,7 @@ class Toiletlist extends Component {
                 }} >
 
                     {marker.name}, {marker.address}, {marker.zip}, {marker.city},
-                    {marker.rating} , {marker.inva} , {marker.pricing} , 
+                    {marker.rating} , {marker.inva} , {marker.pricing} ,
             
                     {/* {geolib.getDistance(
                         {latitude: sessionStorage.getItem("latitude"), longitude: sessionStorage.getItem("longitude")},
