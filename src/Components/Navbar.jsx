@@ -10,6 +10,7 @@ import {
     NavLink,
     Form
 } from 'reactstrap';
+import Map from './Map';
 
 
 export default class CustomNavbar extends React.Component {

@@ -23,6 +23,21 @@ input[type=text], input[type=password] {
     width: 30%;
 }
 
+.normalSignup {
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    padding: 5%;
+}
+
+.socialAuth {
+    background-color: #f7f7f7;
+    border-radius: 5px;
+}
+
+.notReg {
+    font-size: 0.8em;
+}
+
 /* Change styles for smaller screens */
 
 @media screen and (max-width: 1000px) {

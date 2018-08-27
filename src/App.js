@@ -42,7 +42,7 @@ class App extends Component {
           <Router>
             <div>
               <Route exact path="/" component={Main} />
-              <Route path="/Home" component={Home} />
+              {/* <Route path="/Home" component={Home} /> */}
               <Route path="/About" component={About} />
               <Route path="/Wclist" component={Toiletlist} />
               <Route path="/Chat" component={Chat} />

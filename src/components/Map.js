@@ -6,6 +6,7 @@ import Filter from './Filter';
 import MapControl from './MapControl';
 import logo from './plus.png';
 import YourPosition from './YourPosition'
+
 const google = window.google;
 const _ = require("lodash");
 const { compose, withProps, lifecycle } = require("recompose");
